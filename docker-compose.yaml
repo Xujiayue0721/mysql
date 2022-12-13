@@ -1,0 +1,19 @@
+version: '2'
+services:
+   mysql:
+    hostname:  mysql
+    container_name:  mysql
+    restart: always
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password #解决外部无法访问
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: 'root'
+      MYSQL_PASS: '123'
+      LANG: C.UTF-8
+    volumes:
+      - d:/code/docker_project/mysqlData/data/:/var/lib/mysql/
+      - d:/code/docker_project/mysqlData/conf/:/etc/mysql/conf.d/
+      - d:/code/docker_project/mysqlData/init/:/docker-entrypoint-initdb.d/
+    ports:
+      - '20070:3306'
